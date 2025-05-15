@@ -23,7 +23,9 @@ public class Book {
 	@Min(1800)
 	@Max(2025)
     private Integer year;
-    private String urlImage;
+	
+	@Column(name="imagepath")
+    private String imagePath;
     
     @ManyToMany
     private List<Autor> autori;
@@ -52,12 +54,12 @@ public class Book {
 		this.year = year;
 	}
 
-	public String getUrlImage() {
-		return urlImage;
+	public String getImagePath() {
+		return imagePath;
 	}
 
-	public void setUrlImage(String urlImage) {
-		this.urlImage = urlImage;
+	public void setUrlImage(String imagePath) {
+		this.imagePath = imagePath;
 	}
 
 	public List<Autor> getAutori() {

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista Libri</title>
+</head>
+<body>
+    <h1>Lista dei libri</h1>
+    <ul>
+        <li th:each="book : ${books}">
+            <img th:src="@{'/' + ${book.imagePath}}" alt="Copertina libro" width="150" />
+            <span th:text="${book.title}">Titolo</span> - 
+            <span th:text="${book.year}">Anno</span>
+        </li>
+    </ul>
+</body>
+</html>
+

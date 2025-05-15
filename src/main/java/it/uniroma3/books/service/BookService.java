@@ -1,5 +1,17 @@
 package it.uniroma3.books.service;
 
-public class BookService {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import it.uniroma3.books.model.Book;
+import it.uniroma3.books.repository.BookRepository;
+@Service
+public class BookService {
+	
+	@Autowired
+    private BookRepository bookRepository;
+	
+	public Iterable<Book> getAllBooks() {
+		return bookRepository.findAll();
+	}
 }
