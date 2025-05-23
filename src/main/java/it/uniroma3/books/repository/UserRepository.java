@@ -6,11 +6,11 @@ import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 
 import it.uniroma3.books.model.User;
-import it.uniroma3.books.model.Role;
+
 
 public interface UserRepository extends CrudRepository<User, Long> {
 
-    Optional<User> findByUsername(String username);
+    Optional<User> findByName(String name);
 
-    List<User> findByRole(Role role);
+    
 }

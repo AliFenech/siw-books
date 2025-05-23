@@ -13,6 +13,7 @@ public interface BookRepository extends CrudRepository<Book, Long> {
 
     List<Book> findByYear(Integer year);
     
+    public boolean existsByTitleAndYear(String title, int year);
 
     
   

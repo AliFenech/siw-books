@@ -1,14 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
   <head>
     <title>Home Books</title>
     <link rel="stylesheet" href="/stile.css?version=2" />
   </head>
   <body>
-    <div>
-      <a href="/"><img src="/books-logo.png" width="30%" /></a>
-    </div>
+    <header>
+      <div th:if="${userDetails}">
+        <span th:text="${userDetails.username}"></span>
+        <a href="/logout">Logout</a>
+      </div>
+      <div th:unless="${userDetails}">
+        <a href="/login">Login</a>
+        <a href="/register">Registrati</a>
+      </div>
+    </header>
 
+    <div>
+		<div><img src="/images/books-logo.png" width="50%" /></div>
+    </div>
     <div style="margin-top: 20px;">
       <a href="/book">
         <button style="padding: 10px 20px; font-size: 16px;">Vai alla lista dei libri</button>

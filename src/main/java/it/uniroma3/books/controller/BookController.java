@@ -16,7 +16,7 @@ public class BookController {
 	
 	@GetMapping("/book")
 	public String showBooks(Model model) {
-		model.addAttribute("books", this.bookService.getAllBooks());
+		model.addAttribute("books", this.bookService.findAll());
 		return "books.html";
 	}
 	
@@ -29,8 +29,6 @@ public class BookController {
 	
 	
 	
-	@GetMapping("/")
-	  public String home(Model model) {
-		  return "index.html";
-	  }
+
+
 }

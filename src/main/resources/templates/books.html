@@ -7,7 +7,7 @@
     <h1>Lista dei libri</h1>
     <ul>
         <li th:each="book : ${books}">
-            <img th:src="@{'/' + ${book.imagePath}}" alt="Copertina libro" width="150" />
+			<img th:src="@{/images/{image}(image=${book.imagePath})}" alt="Copertina libro" width="150" />
             <span th:text="${book.title}">Titolo</span> - 
             <span th:text="${book.year}">Anno</span>
         </li>

@@ -15,29 +15,44 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
-	private String username;
-	
+	@NotBlank
+	private String name;
+	@NotBlank
+	private String surname;
+	@NotBlank
 	private String password;
-	
-    @Enumerated(EnumType.STRING)
-    private Role role;
+	@NotBlank
+	private String email;
+    
 
 	public Long getId() {
 		return id;
 	}
+	
 
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
 
-	public String getUsername() {
-		return username;
+	public String getName() {
+		return name;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setName(String name) {
+		this.name = name;
 	}
+	
+
+	public String getSurname() {
+		return surname;
+	}
+
+
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
+
 
 	public String getPassword() {
 		return password;
@@ -49,17 +64,17 @@ public class User {
 	
 	
 
-	public Role getRole() {
-		return role;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setRole(Role role) {
-		this.role = role;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(password, username);
+		return Objects.hash(email, password);
 	}
 
 	@Override
@@ -71,8 +86,10 @@ public class User {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		return Objects.equals(password, other.password) && Objects.equals(username, other.username);
+		return Objects.equals(email, other.email) && Objects.equals(password, other.password);
 	}
+
+	
 	
 	
 }
