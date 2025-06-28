@@ -1,47 +1,85 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="it">
 <head>
-	<title>
-		BetterBooks - Login
-	</title>
-	<link rel="stylesheet" href="/css/stile.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BetterBooks - Login</title>
+
+  <!-- Bootstrap & Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Custom CSS -->
+  <link href="/css/main.css" rel="stylesheet" />
+
+  <style>
+    body {
+      background-image: url('/images/sfondo.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+  </style>
 </head>
 
-<body>
-	<header>
-		<div th:if="${userDetails}">
-			<span th:text="${userDetails.username}"></span>
-			<a href="/logout">Logout</a>
-		</div>
-		<div th:unless="${user}">
-			<a href="/login">Login</a>
-		</div>
-	</header>
+<body class="index-page">
 
-	<div>
-		<div><img src="/images/books-logo.png" width="50%" /></div>
-	</div>
-	<h1>Login</h1>
-	<form th:action="@{/login}" method="POST">
-			<div>
-				<span>Username:</span>
-				<span><input name="username" type="text" required /></span>
-			</div>
-			<div>
-				<span>Password:</span>
-				<span><input name="password" type="password" required /></span>
-			</div>
-			<div>
-				<span th:if="${param.error != null}">Username o password errati</span>
-			</div>
-			<div>
-				<span><button type="submit">Login</button></span>
-			</div>
-	</form>
-	<div>
-		<a th:href="@{/register}" th:text="Registrati">Registrati</a>
-	</div>
+  <!-- Navbar -->
+  <header id="header" class="header d-flex align-items-center fixed-top">
+      <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+        <a href="/" class="logo d-flex align-items-center">
+         <img src="/images/books-logo.png" alt="Better Books" style="height: 300px;"> 
+        </a>
+
+        <nav id="navmenu" class="navmenu">
+          <ul>
+            <li><a href="/" class="active">Home</a></li>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/registrazione">Registrati</a></li>
+          </ul>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+
+      </div>
+    </header>
+
+  <!-- Login Form -->
+  <main class="main" style="padding-top: 160px;">
+    <div class="container d-flex justify-content-center align-items-center" style="min-height: 70vh;">
+      <div class="card shadow-lg p-4" style="max-width: 400px; width: 100%; background-color: rgba(255,255,255,0.9); border-radius: 1rem;">
+        <h2 class="text-center mb-4">Login</h2>
+
+        <form th:action="@{/login}" method="post">
+          <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input name="username" type="text" id="username" class="form-control" required />
+          </div>
+
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input name="password" type="password" id="password" class="form-control" required />
+          </div>
+
+          <!-- Messaggio di errore -->
+          <div class="mb-3 text-danger text-center" th:if="${param.error != null}">
+            Username o password errati
+          </div>
+
+          <div class="d-grid">
+            <button type="submit" class="btn btn-primary text-white">Accedi</button>
+          </div>
+        </form>
+
+        <div class="mt-3 text-center">
+          <p>Non hai un account? <a href="/registrazione">Registrati</a></p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- JS -->
+  <script src="/js/main.js"></script>
 </body>
-
 </html>

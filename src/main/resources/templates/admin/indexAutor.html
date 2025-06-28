@@ -24,9 +24,8 @@
         <ul>
           <li><a href="/" class="active">Home</a></li>
 
-          <!-- Solo se NON loggato -->
-          <li th:if="${username == null}"><a href="/login">Login</a></li>
-          <li th:if="${username == null}"><a href="/register">Registrati</a></li>
+      
+   
 
           <!-- Solo se loggato -->
           <li th:if="${username != null}">
@@ -45,15 +44,13 @@
     <div class="container text-center" data-aos="fade-up" data-aos-delay="100">
       
       <!-- Titolo dinamico -->
-      <h2 th:if="${username == null}">Benvenuto in Better Books</h2>
-      <h2 th:if="${username != null}">Bentornato, <span th:text="${username}">Utente</span>!</h2>
+      <h2 th:if="${username == null}">Gestione Autori</h2>
 
-      <p>Condividi la tua passione per i libri
-        <span class="typed" data-typed-items="Functional Websites, Creative Ads, Mobile Apps"></span>
-      </p>
+      
 
       <div>
-        <a href="/books" class="btn btn-primary text-white">Sfoglia il nostro catalogo</a>
+        <a href="/admin/formNewAutor" class="btn btn-primary text-white">Aggiungi nuovo Autore</a>
+		<a href="/autors" class="btn btn-primary text-white">Gestisci Autori</a>
       </div>
     </div>
   </main>

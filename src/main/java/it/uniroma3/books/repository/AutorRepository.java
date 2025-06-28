@@ -1,10 +1,18 @@
 package it.uniroma3.books.repository;
 
+import java.time.LocalDate;
 import java.util.List;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
+
+
+
 
 import org.springframework.data.repository.CrudRepository;
 
 import it.uniroma3.books.model.Autor;
+
 
 public interface AutorRepository extends CrudRepository<Autor, Long> {
 
@@ -16,7 +24,12 @@ public interface AutorRepository extends CrudRepository<Autor, Long> {
 
     List<Autor> findByNationality(String nationality);
 
-    List<Autor> findByYearOfBirth(int yearOfBirth);
+    List<Autor> findByDateOfBirth(LocalDate dateOfBirth);
 
-    List<Autor> findByYearOfDeath(int yearOfDeath);
+    List<Autor> findByDateOfDeath(LocalDate dateOfDeath);
+    
+    public boolean existsByNameAndSurname(String name, String surname);	
+
+	
+
 }

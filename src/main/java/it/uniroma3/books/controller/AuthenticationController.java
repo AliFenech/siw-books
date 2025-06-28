@@ -41,30 +41,44 @@ public class AuthenticationController {
 
 	@GetMapping(value = "/") 
 	public String index(Model model) {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		if (authentication instanceof AnonymousAuthenticationToken) {
-	        return "index.html";
-		}
-		else {		
-			UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
-			if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
-				return "admin/indexAdmin.html";
-			}
-		}
-        return "index.html";
+	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	    if (authentication instanceof AnonymousAuthenticationToken) {
+	        return "index"; 
+	    } else {        
+	        UserDetails userDetails = (UserDetails)authentication.getPrincipal();
+	        Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
+
+	    
+	        model.addAttribute("username", userDetails.getUsername());
+
+	        if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
+	            return "admin/indexAdmin";
+	        }
+	    }
+	    return "index";
 	}
+
+	
 		
-    @GetMapping(value = "/success")
-    public String defaultAfterLogin(Model model) {
-        
-    	UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    	Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
-    	if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
-            return "admin/indexAdmin.html";
-        }
-        return "index.html";
-    }
+	@GetMapping(value = "/success")
+	public String defaultAfterLogin(Model model) {
+	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+	    if (authentication instanceof AnonymousAuthenticationToken) {
+	        return "index";
+	    }
+
+	    UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+	    Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
+
+	    model.addAttribute("username", userDetails.getUsername());
+
+	    if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
+	        return "admin/indexAdmin";
+	    }
+	    return "index";
+	}
+
 
     @PostMapping(value = { "/register" })
     public String registerUser(

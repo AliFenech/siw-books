@@ -14,7 +14,7 @@ public class BookController {
 	private BookService bookService;
 		
 	
-	@GetMapping("/book")
+	@GetMapping("/books")
 	public String showBooks(Model model) {
 		model.addAttribute("books", this.bookService.findAll());
 		return "books.html";

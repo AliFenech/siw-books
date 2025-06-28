@@ -1,4 +1,5 @@
 package it.uniroma3.books.model;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
@@ -7,8 +8,11 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.PastOrPresent;
 
 @Entity
+@Table	(name = "autor")
 public class Autor {
 
 	@Id
@@ -22,18 +26,17 @@ public class Autor {
 	private String surname;
 	
 	@NotNull
-	@Min(1700)
-	@Max(2025)
-    private Integer yearOfBirth;
+	@Past
+    private LocalDate dateOfBirth;
 	
 	
-	@Min(1800)
-	@Max(2025)
-    private Integer yearOfDeath;
+	@PastOrPresent
+    private LocalDate dateOfDeath;
 	
 	private String nationality;
 	
-	private String urlImage;
+	@Lob
+    private byte[] image;
 	
 	@ManyToMany(mappedBy="autori")
 	private List<Book> books;
@@ -62,20 +65,20 @@ public class Autor {
 		this.surname = surname;
 	}
 
-	public Integer getYearOfBirth() {
-		return yearOfBirth;
+	public LocalDate getDateOfBirth() {
+		return dateOfBirth;
 	}
 
-	public void setYearOfBirth(Integer yearOfBirth) {
-		this.yearOfBirth = yearOfBirth;
+	public void setDateOfBirth(LocalDate dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
 	}
 
-	public Integer getYearOfDeath() {
-		return yearOfDeath;
+	public LocalDate getDateOfDeath() {
+		return dateOfDeath;
 	}
 
-	public void setYearOfDeath(Integer yearOfDeath) {
-		this.yearOfDeath = yearOfDeath;
+	public void setDateOfDeath(LocalDate dateOfDeath) {
+		this.dateOfDeath = dateOfDeath;
 	}
 
 	public String getNationality() {
@@ -86,13 +89,13 @@ public class Autor {
 		this.nationality = nationality;
 	}
 
-	public String getUrlImage() {
-		return urlImage;
-	}
+	public byte[] getImage() {
+        return image;
+    }
 
-	public void setUrlImage(String urlImage) {
-		this.urlImage = urlImage;
-	}
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
 
 	public List<Book> getBooks() {
 		return books;
@@ -104,7 +107,7 @@ public class Autor {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(name, nationality, surname, yearOfBirth);
+		return Objects.hash(name, nationality, surname, dateOfBirth);
 	}
 
 	@Override
@@ -117,7 +120,7 @@ public class Autor {
 			return false;
 		Autor other = (Autor) obj;
 		return Objects.equals(name, other.name) && Objects.equals(nationality, other.nationality)
-				&& Objects.equals(surname, other.surname) && Objects.equals(yearOfBirth, other.yearOfBirth);
+				&& Objects.equals(surname, other.surname) && Objects.equals(dateOfBirth, other.dateOfBirth);
 	}
 	
 	

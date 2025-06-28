@@ -18,7 +18,7 @@ public class BookValidator implements Validator {
 		Book book = (Book)o;
 		if (book.getTitle()!=null && book.getYear()!=null 
 				&& bookService.existsByTitleAndYear(book.getTitle(), book.getYear())) {
-			errors.reject("movie.duplicate");
+			errors.reject("book.duplicate");
 		}
 	}
 	@Override

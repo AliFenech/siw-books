@@ -46,14 +46,13 @@
       
       <!-- Titolo dinamico -->
       <h2 th:if="${username == null}">Benvenuto in Better Books</h2>
-      <h2 th:if="${username != null}">Bentornato, <span th:text="${username}">Utente</span>!</h2>
+      <h2 th:if="${username != null}">Bentornato, Admin <span th:text="${username}">Utente</span>!</h2>
 
-      <p>Condividi la tua passione per i libri
-        <span class="typed" data-typed-items="Functional Websites, Creative Ads, Mobile Apps"></span>
-      </p>
+      
 
       <div>
-        <a href="/books" class="btn btn-primary text-white">Sfoglia il nostro catalogo</a>
+        <a href="/admin/indexBook" class="btn btn-primary text-white">Gestisci Libri</a>
+		<a href="/admin/indexAutor" class="btn btn-primary text-white">Gestisci Autori</a>
       </div>
     </div>
   </main>
