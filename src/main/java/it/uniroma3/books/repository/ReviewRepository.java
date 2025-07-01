@@ -19,4 +19,6 @@ public interface ReviewRepository extends CrudRepository<Review, Long> {
 
     // Trova una recensione specifica fatta da un utente su un libro
     Optional<Review> findByUserAndBook(User user, Book book);
+    //Trova tutte le recensioni di uno specifico libro
+    List<Review> findByBookId(Long bookId);
 }

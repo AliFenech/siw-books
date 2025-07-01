@@ -74,12 +74,15 @@
   </header>
 
   <main class="main">
+	
     <div class="autor-box" th:if="${autor}">
       <img th:src="@{/autor/image/{id}(id=${autor.id})}" alt="Immagine Autore" />
       <h1 class="mb-4" th:text="${autor.name} + ' ' + ${autor.surname}">Nome Cognome</h1>
       <p th:text="'Nato: ' + ${autor.dateOfBirth}"></p>
       <p th:if="${autor.dateOfDeath != null}" th:text="'Deceduto: ' + ${autor.dateOfDeath}"></p>
       <p th:text="'Nazionalità: ' + ${autor.nationality}"></p>
+	  <a href="/autors" class="btn btn-secondary mt-3">
+	  			  <i class="bi bi-arrow-left"></i> Torna alla lista
     </div>
 
     <div th:unless="${autor}" class="text-muted">Non esiste</div>

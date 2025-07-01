@@ -33,7 +33,8 @@ public class AutorController {
 	}
 	
 	@GetMapping(value="/admin/indexAutor")
-	public String indexAutor() {
+	public String indexAutor(Model model) {
+		model.addAttribute("autors", this.autorRepository.findAll());
 		return "admin/indexAutor";
 	}
 	
@@ -81,12 +82,51 @@ public class AutorController {
 	    }
 	    return ResponseEntity.notFound().build();
 	}
-
-	@GetMapping("/autor")
+	
+	@GetMapping("/autors")
 	public String getAutor(Model model) {
-		model.addAttribute("autor", this.autorRepository.findAll());
-		return "autors";
+	    model.addAttribute("autors", this.autorRepository.findAll());
+	    return "autors";
 	}
+	
+	@PostMapping("/admin/deleteAutor/{id}")
+	public String deleteAutor(@PathVariable Long id) {
+	    autorRepository.deleteById(id);
+	    return "redirect:/autors";
+	}
+
+	
+	
+	
+	@PostMapping("/admin/updateAutor")
+	public String updateAutor(@ModelAttribute("autor") Autor autor,
+	                          @RequestParam("file") MultipartFile file) {
+	    if (!file.isEmpty()) {
+	        try {
+	            autor.setImage(file.getBytes());
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	    autorRepository.save(autor);
+	    return "redirect:/autors";
+	}
+
+
+	
+	
+
+	@GetMapping("/admin/formUpdateAutor/{id}")
+	public String formUpdateAutor(@PathVariable("id") Long id, Model model) {
+	    Autor autor = autorRepository.findById(id)
+	        .orElseThrow(() -> new IllegalArgumentException("ID autore non valido: " + id));
+	    model.addAttribute("autor", autor);
+	    return "admin/formUpdateAutor";  
+	}
+
+
+	
+	
 	
 	
 	

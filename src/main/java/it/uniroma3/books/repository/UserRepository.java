@@ -10,7 +10,10 @@ import it.uniroma3.books.model.User;
 
 public interface UserRepository extends CrudRepository<User, Long> {
 
-    Optional<User> findByName(String name);
+    User findByName(String name);
+    User findByEmail(String email);
+   
+
 
     
 }

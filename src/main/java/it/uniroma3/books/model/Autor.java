@@ -34,11 +34,11 @@ public class Autor {
     private LocalDate dateOfDeath;
 	
 	private String nationality;
-	
+	@Basic(fetch = FetchType.LAZY)
 	@Lob
     private byte[] image;
 	
-	@ManyToMany(mappedBy="autori")
+	@OneToMany
 	private List<Book> books;
 
 	public Long getId() {

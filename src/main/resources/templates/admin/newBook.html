@@ -24,13 +24,8 @@
         <ul>
           <li><a href="/" class="active">Home</a></li>
 
-          <!-- Solo se NON loggato -->
-          <li th:if="${username == null}"><a href="/login">Login</a></li>
-          <li th:if="${username == null}"><a href="/register">Registrati</a></li>
-
           <!-- Solo se loggato -->
           <li th:if="${username != null}">
-			
             <form th:action="@{/logout}" method="post" style="display:inline;">
               <button type="submit" class="btn btn-link nav-link" style="padding:0; border:none; background:none; cursor:pointer;">Logout</button>
             </form>
@@ -43,28 +38,52 @@
   </header>
 
   <main class="main" style="padding-top: 160px;">
-    <div class="container text-center" data-aos="fade-up" data-aos-delay="100">
-      
-      <!-- Titolo dinamico -->
-      <h2 th:if="${username == null}">Benvenuto in Better Books</h2>
-      <h2 th:if="${username != null}">Bentornato, <span th:text="${username}">Utente</span>!</h2>
+    <div class="container" data-aos="fade-up" data-aos-delay="100">
+      <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+          <div class="card shadow-lg rounded bg-body text-body">
+            <div class="card-body">
+              <h2 class="text-center mb-4">Aggiungi un libro</h2>
 
-      <p>Condividi la tua passione per i libri
-        <span class="typed" data-typed-items="Functional Websites, Creative Ads, Mobile Apps"></span>
-      </p>
+              <form th:action="@{/admin/book}" method="post" enctype="multipart/form-data" th:object="${book}">
+                <div th:if="${messaggioErrore}" class="alert alert-danger" role="alert" th:text="${messaggioErrore}">Errore</div>
 
-      <div>
-        <a href="/books" class="btn btn-primary text-white">Sfoglia il nostro catalogo</a>
+                <div class="mb-3">
+                  <label class="form-label">Titolo:</label>
+                  <input required type="text" class="form-control" th:field="*{title}" />
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Anno:</label>
+                  <input required type="number" class="form-control" th:field="*{year}" />
+                </div>
+				<div class="mb-3">
+					<label class="form-label">Autore:</label>
+					<select class="form-select" th:field="*{autore.id}">
+					  <option th:each="a : ${autori}" 
+					          th:value="${a.id}" 
+					          th:text="${a.name + ' ' + a.surname}">
+					  </option>
+					</select>
+
+
+				  
+				</div>
+
+                
+
+                <div class="mb-3">
+                  <label for="imageFile" class="form-label">Immagine Libro</label>
+                  <input type="file" id="imageFile" name="imageFile" class="form-control" />
+                </div>
+
+                <button type="submit" class="btn btn-primary">Salva</button>
+              </form>
+
+            </div>
+          </div>
+        </div>
       </div>
-	  <div style="margin-top: 10px;">
-	  <div>
-		
-	          <a href="/mieRecensioni" class="btn btn-primary text-white">Le tue recensioni</a>
-			  
-			  
-			  <a href="/autors" class="btn btn-primary text-white">Tutti gli Autori</a>
-			  
-	        </div>
     </div>
   </main>
 

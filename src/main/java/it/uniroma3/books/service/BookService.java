@@ -24,12 +24,6 @@ public class BookService {
 		bookRepository.save(book);
 	}
 
-	public Iterable<Book> findByYear(int year) {
-		return bookRepository.findByYear(year);
+
 	}
 
-	public boolean existsByTitleAndYear(String title, Integer year) {
-		return bookRepository.existsByTitleAndYear(title, year);
-	}
-
-}

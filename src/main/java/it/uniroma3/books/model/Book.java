@@ -24,11 +24,16 @@ public class Book {
 	@Max(2025)
     private Integer year;
 	
-	@Column(name="imagepath")
-    private String imagePath;
+	
+	@Lob
+	@Basic(fetch = FetchType.LAZY)
+	private byte[] image;
+
+
+	
     
-    @ManyToMany
-    private List<Autor> autori;
+    @ManyToOne
+    private Autor autore;
 
 	public Long getId() {
 		return id;
@@ -54,26 +59,27 @@ public class Book {
 		this.year = year;
 	}
 
-	public String getImagePath() {
-		return imagePath;
+	public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
+	public Autor getAutore() {
+		return autore;
 	}
 
-	public void setUrlImage(String imagePath) {
-		this.imagePath = imagePath;
-	}
-
-	public List<Autor> getAutori() {
-		return autori;
-	}
-
-	public void setAutori(List<Autor> autori) {
-		this.autori = autori;
+	public void setAutore(Autor autore) {
+		this.autore = autore;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(autori, title, year);
+		return Objects.hash(autore, title, year);
 	}
+	 
 
 	@Override
 	public boolean equals(Object obj) {
@@ -84,7 +90,7 @@ public class Book {
 		if (getClass() != obj.getClass())
 			return false;
 		Book other = (Book) obj;
-		return Objects.equals(autori, other.autori) && Objects.equals(title, other.title)
+		return Objects.equals(autore, other.autore) && Objects.equals(title, other.title)
 				&& Objects.equals(year, other.year);
 	}
     
